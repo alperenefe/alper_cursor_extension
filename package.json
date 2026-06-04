@@ -1,0 +1,107 @@
+{
+  "name": "cursor-remote-extension",
+  "displayName": "Cursor Remote",
+  "description": "Remote control Cursor AI from your mobile device via WebSocket or Relay Server",
+  "version": "0.4.0",
+  "publisher": "alperenefe",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alperenefe/alper_cursor_extension.git"
+  },
+  "homepage": "https://github.com/alperenefe/alper_cursor_extension",
+  "bugs": {
+    "url": "https://github.com/jaloveeye/cursor-remote/issues"
+  },
+  "keywords": [
+    "cursor",
+    "remote",
+    "mobile",
+    "websocket",
+    "relay",
+    "session",
+    "cli",
+    "agent"
+  ],
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Cursor Remote",
+      "properties": {
+        "cursorRemote.authToken": {
+          "type": "string",
+          "default": "",
+          "description": "Shared secret for mobile WebSocket clients. Leave empty to disable auth."
+        },
+        "cursorRemote.composerUseFast": {
+          "type": "boolean",
+          "default": false,
+          "description": "CLI agent --model: true = composer-2.5-fast, false = composer-2.5 (full). Mobile insert_text overrides when set."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "cursorRemote.start",
+        "title": "Start Cursor Remote Server"
+      },
+      {
+        "command": "cursorRemote.stop",
+        "title": "Stop Cursor Remote Server"
+      },
+      {
+        "command": "cursorRemote.toggle",
+        "title": "Toggle Cursor Remote Server"
+      },
+      {
+        "command": "cursorRemote.showConnections",
+        "title": "Cursor Remote: Show connection info"
+      },
+      {
+        "command": "cursorRemote.statusBarClick",
+        "title": "Cursor Remote: Relay connect (status bar)"
+      },
+      {
+        "command": "cursorRemote.checkRelayServer",
+        "title": "Cursor Remote: Check relay server"
+      },
+      {
+        "command": "cursorRemote.connectToRelaySessionById",
+        "title": "Cursor Remote: Connect relay by session ID"
+      },
+      {
+        "command": "cursorRemote.setRelaySessionId",
+        "title": "Cursor Remote: Set relay session ID"
+      },
+      {
+        "command": "cursorRemote.generateAuthToken",
+        "title": "Cursor Remote: Generate 8-char auth PIN"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test:mobile-prompt": "npm run compile && node test/mobile-prompt.test.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.74.0",
+    "@types/ws": "^8.5.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
+}
